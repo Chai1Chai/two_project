@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { type IProduct } from '../types'
+import Visible from "../components/Visible"
+import ProductCard from "../components/ProductCard"
+const reponse = await fetch('https://fakestoreapi.com/products')
+const products = (await reponse.json()) as IProduct[]
+---
+<Layout title="Products">
+	<h1 class="text-2xl font-bold">Products page</h1>
+    {products.map((prod) =><ProductCard client:load product={prod} />)}
+    <Visible client:visible/>
+</Layout>
